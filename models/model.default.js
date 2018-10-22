@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const moment = require('moment');
 const Schema = mongoose.Schema;
+templateIds = require('./templateConfig');
 
 var Template = new Schema({
     templateId:String,
