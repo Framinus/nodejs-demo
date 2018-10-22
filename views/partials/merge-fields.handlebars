@@ -173,6 +173,7 @@
                         url: response.unclaimed_draft.claim_url,
                         container:document.getElementById('previewMergeContainer'),
                         allowCancel: true,
+                        skipDomainVerification: true,
                         messageListener: function(eventData) {
                             console.log(eventData);
                             if(eventData.event=='signature_request_sent'){

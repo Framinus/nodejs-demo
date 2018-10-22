@@ -18,7 +18,8 @@
                 url: response.embedded.sign_url,
                 container:document.getElementById('embeddedSigningContainer'),
                 uxVersion: 2,
-	        allowCancel: true,
+	              allowCancel: true,
+                skipDomainVerification: true,
                 messageListener: function(eventData) {
                     console.log(eventData);
 

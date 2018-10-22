@@ -129,8 +129,9 @@
 
                                 HelloSign.open({
                                     url: response.template['edit_url'],
-                                    container:document.getElementById('embeddedTemplatesContainer'),
+                                    container: document.getElementById('embeddedTemplatesContainer'),
                                     allowCancel: true,
+                                    skipDomainVerification: true,
                                     messageListener: function(eventData) {
                                         if(eventData.event=='template_created'){
                                             $('.step2').addClass('hidden');

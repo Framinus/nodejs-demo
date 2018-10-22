@@ -88,6 +88,7 @@
                                     url: response.template['edit_url'],
                                     container:document.getElementById('embeddedTemplatesContainer'),
                                     allowCancel: true,
+                                    skipDomainVerification: true,
                                     messageListener:function(eventData){
                                         $('.step2').addClass('hidden');
                                         $('.step3').removeClass('hidden');
