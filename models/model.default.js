@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+mongoose.plugin(schema => { schema.options.usePushEach = true });
 const moment = require('moment');
 const Schema = mongoose.Schema;
-templateIds = require('./templateConfig');
+templateIds = require('../templateConfig');
 
 var Template = new Schema({
     templateId:String,
@@ -29,15 +30,14 @@ defaults.findOne({_id:'defaultSettings'}, function(err, doc){
         var initTemplates = new defaults({
             _id:'defaultSettings',
             mergeTemplate:{
-                templateId:'d89b39bd48d91a493286c961aafe69323b86a0d2',
-                //templateId:'467a06a019637c331ca609a7763ff826674da496',
+                templateId: templateIds.mergeTemplateId,
                 category:[],
                 name:'Updated Employee Agreement',
                 filename:'employment-agreement-updated.pdf',
                 finalized:true
             },
             embeddedTemplate:{
-                templateId:'61176360f7b40a5d019478ca7bb9cfa5fccf718e',
+                templateId: templateIds.embeddedTemplateId,
                 category:[],
                 name:'Embedded Mutual NDA',
                 filename:'mutual-nda-with-date.pdf',
@@ -45,56 +45,56 @@ defaults.findOne({_id:'defaultSettings'}, function(err, doc){
             },
             templates:[
                 {
-                    templateId:'9479d44d23f653e105bc52c98560ed46aff9d216',
+                    templateId: templateIds.vendorAgreementId,
                     category:['hr','legal'],
                     name:'Vendor Agreement',
                     filename:'vendor_agreement.pdf',
                     finalized:true
                 },
                 {
-                    templateId:'1e750f957431c310a4439acfbbe6831c1408d26f',
+                    templateId: templateIds.commercialLeaseId,
                     category:['realestate'],
                     name:'Commercial Lease',
                     filename:"commercial-lease.pdf",
                     finalized:true
                 },
                 {
-                    templateId:'185d012a12b5351efb7d176f4f3db5ae36e96c11',
+                    templateId: templateIds.purchaseAgreementId,
                     category:['realestate'],
                     name:'Purchase Agreement',
                     filename:"purchase-agreement.pdf",
                     finalized:true
                 },
                 {
-                    templateId:'fef256fc72fc9e174d72c521819c0aa53c1c1014',
+                    templateId: templateIds.stockOptionId,
                     category:['legal'],
                     name:'Stock Option Agreement',
                     filename:"stock_option_agreement.pdf",
                     finalized:true
                 },
                 {
-                    templateId:'95f85e828cc1b48208eb4a72f8870ca1aeab80c0',
+                    templateId: templateIds.w4Id,
                     category:['hr'],
                     name:'Form W-4',
                     filename:'w4.pdf',
                     finalized:true
                 },
                 {
-                    templateId:'85ce83ba46920f9d8114397744926cef9065f07b',
+                    templateId: templateIds.w9Id,
                     category:['hr'],
                     name:'Form W-9',
                     filename:'w9.pdf',
                     finalized:true
                 },
                 {
-                    templateId:'8f8da155b8a229b83e5bc7faf2c8f77d669d6c58',
+                    templateId: templateIds.subcontractorId,
                     category:['hr','legal'],
                     name:'Subcontractor Agreement',
                     filename:'sub_contractor.pdf',
                     finalized:true
                 },
                 {
-                    templateId:'c5961859652155b952d0479d5a083bb9acae2e6d',
+                    templateId: templateIds.mutualNDAId,
                     category:['hr','legal'],
                     name:'Mutual NDA',
                     filename:"mutual-nda-with-date.pdf",

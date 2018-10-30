@@ -253,7 +253,7 @@ module.exports = {
             message : 'This is our embedded signing demo.',
             signers : [
                 {
-                    email_address : 'joe@finsweet.com',
+                    email_address : 'james.mccormack@hellosign.com',
                     name : 'Signer',
                     role : 'Second Party'
                 }
@@ -288,7 +288,7 @@ module.exports = {
             message : 'This is our embedded signing demo.',
             signers : [
                 {
-                    email_address : 'joe@finsweet.com',
+                    email_address : 'james.mccormack@hellosign.com',
                     name : 'Signer',
                     order : 1
                 }

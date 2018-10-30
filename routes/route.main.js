@@ -31,7 +31,9 @@ module.exports = function(router){
 
             var data = req.body;
             if(req.file){
-                data.logo = req.file.path;
+              // removing "path" from req.file.path as experiment
+                data.logo = req.file;
+                console.log('data.logo', data.logo);
                 var colors = form.getColors(data.logo);
                 data.primaryColor = colors.primary;
                 data.darkColor = colors.dark;

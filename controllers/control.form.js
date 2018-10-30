@@ -1,5 +1,5 @@
 var hellosign = require('hellosign-sdk')({key: config.hellosignKey});
-// var ColorThief = require('color-thief');
+var ColorThief = require('@mariotacke/color-thief');
 var tinycolor = require('tinycolor2');
 var request = require('request');
 var contrast = require('wcag-contrast');
@@ -7,37 +7,36 @@ var fs = require('fs');
 
 module.exports = {
 
-    // getColors: function(uri){
-    //
-    //     var colorThief = new ColorThief();
-    //
-    //     var palette = colorThief.getPalette(uri);
-    //
-    //     var colors = [];
-    //
-    //     //Convert colors to hexstring
-    //     palette.map(function(c){
-    //         var tc = tinycolor("rgb ("+c[0]+","+c[1]+","+c[2]+")");
-    //         colors.push(tc.toHexString())
-    //     });
-    //
-    //     var selected = {
-    //         primary:colors[0]
-    //     };
-    //
-    //     //Select first 'dark' color in palette generated from image
-    //     for(var i=0;i<colors.length;i++){
-    //         if(tinycolor(colors[i]).isDark()){
-    //             selected.primary=colors[i];
-    //             break;
-    //         }
-    //     }
-    //
-    //     selected.dark = '#ffffff';
-    //
-    //     return selected;
-    //
-    // },
+    getColors: function(uri){
+
+        var colorThief = new ColorThief();
+        var palette = colorThief.getPalette(uri);
+
+        var colors = [];
+
+        //Convert colors to hexstring
+        palette.map(function(c){
+            var tc = tinycolor("rgb ("+c[0]+","+c[1]+","+c[2]+")");
+            colors.push(tc.toHexString())
+        });
+
+        var selected = {
+            primary:colors[0]
+        };
+
+        //Select first 'dark' color in palette generated from image
+        for(var i=0;i<colors.length;i++){
+            if(tinycolor(colors[i]).isDark()){
+                selected.primary=colors[i];
+                break;
+            }
+        }
+
+        selected.dark = '#ffffff';
+
+        return selected;
+
+    },
 
 
     getContentBackground: function(color){
