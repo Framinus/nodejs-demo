@@ -14,6 +14,6 @@ var User = new Schema({
     contentBackground: String,
     usage: [String],
     logo: String
-});
+}, { usePushEach: true });
 
 module.exports = mongoose.model('User', User);

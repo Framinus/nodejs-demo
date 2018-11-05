@@ -17,10 +17,11 @@ module.exports = {
         else {
             data.ccroles = []};
 
-        if(data.roles) {
-            data.roles = (data.roles).split(",")}
-        else {
-            data.roles = []};
+        // if(data.roles) {
+        //   console.log('data.roles', data.roles);
+        //     data.roles = data.roles.split(",")}
+        // else {
+        //     data.roles = []};
 
         var newroles = [];
 

@@ -226,6 +226,7 @@
                 HelloSign.open({
                     url: response.template['edit_url'],
                     container:document.getElementById('embeddedTemplatesContainer'),
+                    skipDomainVerification: true,
                     allowCancel: true,
                     messageListener: function(eventData) {
                         if(eventData.event=='template_created'){

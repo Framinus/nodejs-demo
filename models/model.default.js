@@ -11,14 +11,14 @@ var Template = new Schema({
     filename:String,
     createdat:Number,
     finalized:{type:Boolean, default:false}
-}, {_id:false, strict:false});
+}, {_id:false, strict:false, usePushEach: true });
 
 var Default = new Schema({
     _id: String,
     embeddedTemplate:Template,
     mergeTemplate:Template,
     templates: [Template]
-});
+}, { usePushEach: true });
 
 var defaults = mongoose.model('Default', Default);
 

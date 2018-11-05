@@ -1,3 +1,4 @@
+// require('jsdom-global')();
 var hellosign = require('../controllers/control.hellosign');
 var form = require('../controllers/control.form');
 var entity = require('../models/model.entity');
@@ -31,9 +32,8 @@ module.exports = function(router){
 
             var data = req.body;
             if(req.file){
-              // removing "path" from req.file.path as experiment
-                data.logo = req.file;
-                console.log('data.logo', data.logo);
+                data.logo = req.file.path;
+                // tracing the error path - this is the base function that throws the error.
                 var colors = form.getColors(data.logo);
                 data.primaryColor = colors.primary;
                 data.darkColor = colors.dark;

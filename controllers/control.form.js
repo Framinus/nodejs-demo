@@ -1,5 +1,5 @@
 var hellosign = require('hellosign-sdk')({key: config.hellosignKey});
-var ColorThief = require('@mariotacke/color-thief');
+var ColorThief = require('color-thief');
 var tinycolor = require('tinycolor2');
 var request = require('request');
 var contrast = require('wcag-contrast');
@@ -7,6 +7,7 @@ var fs = require('fs');
 
 module.exports = {
 
+  // this is being called in routes/route.main.js and being passed the logo object.
     getColors: function(uri){
 
         var colorThief = new ColorThief();

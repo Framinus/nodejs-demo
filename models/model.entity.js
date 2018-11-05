@@ -10,7 +10,7 @@ var Request = new Schema({
     message: String,
     category: String,
     createdat:Number
-});
+}, { usePushEach: true });
 
 var Template = new Schema({
     templateId:String,
@@ -19,7 +19,7 @@ var Template = new Schema({
     createdat:Number,
     filename: String,
     finalized:{type:Boolean, default:false}
-}, {_id:false, strict:false});
+}, {_id:false, strict:false, usePushEach: true });
 
 var Entity = new Schema({
     company: String,
@@ -36,6 +36,6 @@ var Entity = new Schema({
     logo: String,
     templates:[Template],
     requests:[Request]
-});
+}, { usePushEach: true });
 
 module.exports = mongoose.model('Entity', Entity);

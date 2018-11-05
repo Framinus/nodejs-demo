@@ -7,6 +7,6 @@ var Request = new Schema({
     company: String,
     createdat: Number,
     url: String
-});
+}, { usePushEach: true });
 
 module.exports = mongoose.model('Request', Request);
