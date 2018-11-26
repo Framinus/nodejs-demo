@@ -17,11 +17,10 @@ module.exports = {
         else {
             data.ccroles = []};
 
-        // if(data.roles) {
-        //   console.log('data.roles', data.roles);
-        //     data.roles = data.roles.split(",")}
-        // else {
-        //     data.roles = []};
+        if(data.roles) {
+            data.roles = data.roles.split(",")}
+        else {
+            data.roles = []};
 
         var newroles = [];
 
@@ -44,11 +43,20 @@ module.exports = {
             subject: data.subject,
             message: data.message,
             signer_roles: newroles,
-            cc_roles: data.ccroles
+            cc_roles: data.ccroles,
+            // here is where the experimental merge fields are:
+            merge_fields:[
+                {name:'employee_name',type: 'text'},
+                {name:'position',type: 'text'},
+                {name:'ready',type: 'checkbox'},
+                {name:'able',type: 'checkbox'},
+                {name:'willing',type: 'checkbox'},
+            ],
         };
 
         hellosign.template.createEmbeddedDraft(options)
             .then(function(response){
+              console.log('response', response);
                 if(response.statusMessage=='OK'){
 
                     entity.findOne({url:data.company}, function(err, doc){
@@ -151,26 +159,62 @@ module.exports = {
     },
 
     sendRequestFromTemplate: function(data, cb){
+      // added custom field values here.
+      // here is the trick - i need to poll the merge fields coming off the template.
+      // with the template/get endpoint.
+      // then, i need to adjust the custom_fields based on those results.
+      const employeeName = {"name": "employee_name", "value": "Bob"};
+      const position = {"name": "position", "value": "supervisor"};
+      const able = {"name": "able", "value": true};
+      const ready = {"name": "ready", "value": true};
+      const willing = {"name": "willing", "value": true};
 
-        var options = {
+      hellosign.template.get(data.templateId)
+        .then((templateInfo) => {
+          const fieldNames = templateInfo.template.custom_fields;
+          const presentNames = fieldNames.map(name => {
+            return name.name;
+          })
+          console.log('presentNames', presentNames);
+          return presentNames;
+        })
+        .then((fields) => {
+
+          const customFields = [];
+          if (fields.includes('employee_name')) {
+            customFields.push(employeeName);
+          }
+          if (fields.includes('position')) {
+            customFields.push(position);
+          }
+          if (fields.includes('able')) {
+            customFields.push(able);
+          }
+          if (fields.includes('ready')) {
+            customFields.push(ready);
+          }
+          if (fields.includes('willing')) {
+            customFields.push(willing);
+          }
+          var options = {
             test_mode : 1,
             template_id : data.templateId,
             title : data.title,
             subject : data.subject,
             message : data.message,
             signers : data.signers,
+            custom_fields: customFields,
             allow_decline:1
-        };
-
-        hellosign.signatureRequest.sendWithTemplate(options)
-            .then(function(response){
-                cb(response)
-            })
-            .catch(function(err){
-                console.log(err);
-                cb(err);
-            });
-
+          };
+          hellosign.signatureRequest.sendWithTemplate(options)
+          .then(function(response){
+            cb(response)
+          })
+          .catch(function(err){
+            console.log(err);
+            cb(err);
+          });
+        })
     },
 
     recordRequest: function(data, response, cb){
