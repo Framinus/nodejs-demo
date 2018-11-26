@@ -33,7 +33,6 @@ module.exports = function(router){
             var data = req.body;
             if(req.file){
                 data.logo = req.file.path;
-                // tracing the error path - this is the base function that throws the error.
                 var colors = form.getColors(data.logo);
                 data.primaryColor = colors.primary;
                 data.darkColor = colors.dark;
@@ -252,7 +251,6 @@ module.exports = function(router){
         .post(function(req, res){
 
             var url = req.headers.referer.split('/')[3];
-
             var data = {
                 url:url,
                 id:req.body.id
@@ -430,8 +428,7 @@ module.exports = function(router){
 
             if(data.event){
                 if(data.event.event_type=='template_created'){
-
-                    console.log(data.event.event_metadata);
+                    console.log('template created data', data.event.event_metadata);
 
                     entity.findOne({'templates.templateId':data.event.event_metadata.template_id}, function(err, doc){
                         if(err)
@@ -443,7 +440,6 @@ module.exports = function(router){
                                     obj.finalized = true;
                                 }
                             });
-
                             doc.save();
 
                         }
